@@ -16,26 +16,26 @@ export class Notification extends Document {
     description: 'User ID to send the notification',
     example: 'uuid',
   })
-  readonly userId: string;
+  userId: string;
 
   @ApiProperty({
     type: String,
     description: 'Notification title',
     example: 'Notification title',
   })
-  readonly title: string;
+  title: string;
 
   @ApiProperty({
     type: String,
     description: 'Notification content',
     example: 'Notification content',
   })
-  readonly content: string;
+  content: string;
 
   @ApiPropertyOptional({
     type: String,
   })
-  readonly url: string;
+  url: string;
 
   @ApiPropertyOptional({
     enumName: 'NotificationType',
@@ -43,27 +43,27 @@ export class Notification extends Document {
     description: 'Notification type',
     example: 'info',
   })
-  readonly type: NotificationType;
+  type: NotificationType;
 
   @ApiProperty({
     type: Boolean,
     description: 'Notification read status',
     example: 'true',
   })
-  readonly read: boolean;
+  read: boolean;
 
   @ApiProperty({
     type: String,
     description: 'Notification origen',
     example: 'uuid',
   })
-  readonly from: string;
+  from: string;
 
   @ApiProperty({
     type: Date,
     description: 'Notification created date',
   })
-  readonly createdAt?: Date;
+  createdAt?: Date;
   // readonly user: PopulatedDoc<User & Document>;
 }
 

@@ -5,6 +5,7 @@ import {
   WebSocketServer,
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
+import { CreateNotificationDto } from 'src/notification/dto/create-notification.dto';
 import { MessageFromClientDto } from './entities/message-from-client.dto';
 import { WebsocketService } from './websocket.service';
 
@@ -31,5 +32,10 @@ export class WebsocketGateway implements OnModuleInit {
       client,
       payload.notificationId,
     );
+  }
+
+  @SubscribeMessage('generate-notification')
+  generateNotification(client: Socket, payload: CreateNotificationDto) {
+    this.websocketService.generateNotification(client, payload);
   }
 }
