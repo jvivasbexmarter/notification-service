@@ -5,11 +5,8 @@ import { NotificationModule } from './notification/notification.module';
 import { WebsocketModule } from './websockets/websocket.module';
 
 const envFilePath = `./environments/.${process.env.NODE_ENV}.env`;
+const environmet = process.env.NODE_ENV;
 
-const uri =
-  process.env.NODE_ENV === 'production'
-    ? process.env.MONGODB
-    : 'mongodb://localhost:27017/notification-service';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -19,7 +16,10 @@ const uri =
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       useFactory: async (configService: ConfigService) => ({
-        uri: configService.get<string>('MONGODB'),
+        uri:
+          environmet === 'dev'
+            ? configService.get<string>('MONGODB_DEV')
+            : configService.get<string>('MONGODB_PROD'),
       }),
       inject: [ConfigService],
     }),
